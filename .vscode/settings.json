@@ -1,0 +1,27 @@
+{
+    "dotnet.defaultSolution": "NDXPostgreSQL.sln",
+    "omnisharp.enableRoslynAnalyzers": true,
+    "omnisharp.enableEditorConfigSupport": true,
+    "omnisharp.organizeImportsOnFormat": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "files.exclude": {
+        "**/bin": true,
+        "**/obj": true
+    },
+    "[csharp]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp"
+    },
+    "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
+    "csharp.semanticHighlighting.enabled": true,
+    "dotnetAcquisitionExtension.existingDotnetPath": [
+        {
+            "extensionId": "ms-dotnettools.csharp",
+            "path": "/usr/share/dotnet/dotnet"
+        }
+    ],
+    "dotnet.dotnetPath": "/usr/share/dotnet/dotnet"
+}

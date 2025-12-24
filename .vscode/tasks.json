@@ -1,0 +1,132 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/NDXPostgreSQL.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary;ForceNoAlign"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build-tests",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/tests/NDXPostgreSQL.Tests/NDXPostgreSQL.Tests.csproj",
+                "/property:GenerateFullPaths=true"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/tests/NDXPostgreSQL.Tests/NDXPostgreSQL.Tests.csproj",
+                "--no-build",
+                "--verbosity",
+                "normal"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "test-unit",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/tests/NDXPostgreSQL.Tests/NDXPostgreSQL.Tests.csproj",
+                "--filter",
+                "FullyQualifiedName~Unit",
+                "--verbosity",
+                "normal"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test-integration",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/tests/NDXPostgreSQL.Tests/NDXPostgreSQL.Tests.csproj",
+                "--filter",
+                "FullyQualifiedName~Integration",
+                "--verbosity",
+                "normal"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "restore",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "restore",
+                "${workspaceFolder}/NDXPostgreSQL.sln"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "clean",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean",
+                "${workspaceFolder}/NDXPostgreSQL.sln"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "docker-up",
+            "type": "shell",
+            "command": "docker compose -f ${workspaceFolder}/docker/docker-compose.yml up -d",
+            "problemMatcher": [],
+            "group": "none"
+        },
+        {
+            "label": "docker-down",
+            "type": "shell",
+            "command": "docker compose -f ${workspaceFolder}/docker/docker-compose.yml down",
+            "problemMatcher": [],
+            "group": "none"
+        },
+        {
+            "label": "docker-logs",
+            "type": "shell",
+            "command": "docker compose -f ${workspaceFolder}/docker/docker-compose.yml logs -f postgres",
+            "problemMatcher": [],
+            "group": "none"
+        },
+        {
+            "label": "docker-psql",
+            "type": "shell",
+            "command": "docker exec -it ndxpostgresql-test psql -U testuser -d ndxpostgresql_test",
+            "problemMatcher": [],
+            "group": "none"
+        },
+        {
+            "label": "docker-clean",
+            "type": "shell",
+            "command": "docker compose -f ${workspaceFolder}/docker/docker-compose.yml down -v --rmi all",
+            "problemMatcher": [],
+            "group": "none"
+        }
+    ]
+}

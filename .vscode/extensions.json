@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.dotnet-interactive-vscode",
+        "ms-azuretools.vscode-docker",
+        "formulahendry.dotnet-test-explorer",
+        "jmrog.vscode-nuget-package-manager",
+        "patcx.vscode-nuget-gallery",
+        "streetsidesoftware.code-spell-checker-french",
+        "ckolkman.vscode-postgres"
+    ]
+}
