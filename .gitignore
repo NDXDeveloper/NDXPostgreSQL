@@ -1,0 +1,130 @@
+# =============================================================================
+# NDXPostgreSQL - .gitignore
+# =============================================================================
+
+# =============================================================================
+# .NET
+# =============================================================================
+bin/
+obj/
+out/
+
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+*.cache
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+.nuget/
+packages/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Test Results
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+coverage-report/
+TestResults/
+
+# =============================================================================
+# IDE
+# =============================================================================
+
+# VS Code (garder .vscode mais ignorer certains fichiers)
+#.vscode/*
+#!.vscode/settings.json
+#!.vscode/tasks.json
+#!.vscode/launch.json
+#!.vscode/extensions.json
+
+# JetBrains
+*.sln.iml
+
+# =============================================================================
+# OS
+# =============================================================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# =============================================================================
+# Docker
+# =============================================================================
+docker/data/
+docker/logs/
+
+# =============================================================================
+# Secrets et configuration locale
+# =============================================================================
+*.local.json
+*.local.yml
+*.local.yaml
+appsettings.local.json
+appsettings.Development.json
+secrets.json
+.env
+.env.local
+.env.*.local
+
+# =============================================================================
+# Divers
+# =============================================================================
+
+# Logs
+*.log
+logs/
+
+# Temp files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Generated documentation
+docs/_site/
+docs/api/
+
+# Package lock files (pour permettre les mises à jour)
+# packages.lock.json
