@@ -1,0 +1,105 @@
+# ============================================================================
+# NDXPostgreSQL - Docker Compose pour environnement de développement/tests
+# ============================================================================
+# Ce fichier configure un conteneur PostgreSQL 18 pour les tests
+# de la bibliothèque NDXPostgreSQL.
+#
+# Auteur: Nicolas DEOUX <NDXDev@gmail.com>
+# Version: 1.0.0
+#
+# UTILISATION:
+#   Démarrer:     docker compose up -d
+#   Arrêter:      docker compose down
+#   Logs:         docker compose logs -f
+#   Supprimer:    docker compose down -v --rmi all
+#
+# Avec pgAdmin (interface web):
+#   docker compose --profile admin up -d
+# ============================================================================
+
+services:
+  postgres:
+    image: postgres:18
+    container_name: ndxpostgresql-test
+    restart: unless-stopped
+
+    # Configuration des ports
+    ports:
+      - "5432:5432"
+
+    # Variables d'environnement
+    environment:
+      # Mot de passe superutilisateur (à modifier en production!)
+      POSTGRES_PASSWORD: rootpassword
+
+      # Base de données créée automatiquement au démarrage
+      POSTGRES_DB: ndxpostgresql_test
+
+      # Utilisateur de test créé automatiquement
+      POSTGRES_USER: testuser
+
+      # Fuseau horaire
+      TZ: Europe/Paris
+      PGTZ: Europe/Paris
+
+    # Volumes pour persistance des données
+    volumes:
+      # Données PostgreSQL persistantes (PostgreSQL 18+ utilise /var/lib/postgresql)
+      - postgres_data:/var/lib/postgresql
+
+      # Scripts d'initialisation (exécutés au premier démarrage)
+      - ./init:/docker-entrypoint-initdb.d:ro
+
+    # Healthcheck pour vérifier l'état du conteneur
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U testuser -d ndxpostgresql_test"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+    # Configuration réseau
+    networks:
+      - ndxpostgresql-network
+
+  # Service pgAdmin (optionnel) - Interface web pour PostgreSQL
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: ndxpostgresql-pgadmin
+    restart: unless-stopped
+    profiles:
+      - admin  # Activé uniquement avec: docker compose --profile admin up -d
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@ndxpostgresql.local
+      PGADMIN_DEFAULT_PASSWORD: admin_password
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+
+    ports:
+      - "5050:80"
+
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    networks:
+      - ndxpostgresql-network
+
+# Définition des volumes nommés
+volumes:
+  postgres_data:
+    driver: local
+    name: ndxpostgresql-data
+  pgadmin_data:
+    driver: local
+    name: ndxpostgresql-pgadmin-data
+
+# Définition du réseau
+networks:
+  ndxpostgresql-network:
+    driver: bridge
+    name: ndxpostgresql-net
