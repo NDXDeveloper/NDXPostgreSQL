@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>NDXPostgreSQL</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>13</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Version>1.0.0</Version>
+    <Authors>Nicolas DEOUX</Authors>
+    <Company>NDXDev</Company>
+    <Description>Bibliothèque de connexion PostgreSQL moderne et performante pour C# 13 / .NET 10</Description>
+    <Copyright>Copyright (c) 2025 Nicolas DEOUX</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/NDXDeveloper/NDXPostgreSQL-Connecteur-CSHARP10</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/NDXDeveloper/NDXPostgreSQL-Connecteur-CSHARP10</RepositoryUrl>
+    <PackageTags>postgresql;database;csharp;dotnet;async;cross-platform;npgsql</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
